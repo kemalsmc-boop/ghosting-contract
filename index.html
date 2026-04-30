@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pre-Ghosting Notification Agreement, Kemal Rahman & Juliet Nguyen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --honey: #C8832A;
+  --honey-light: #E8A84A;
+  --honey-pale: #F5E6C8;
+  --honey-wash: #FBF4E8;
+  --amber: #D4952E;
+  --amber-deep: #A86820;
+  --cream: #FAF6EE;
+  --warm-white: #FFF8F0;
+  --bark: #3D2409;
+  --bark-mid: #6B4018;
+  --bark-light: #8C5A28;
+  --purple-mist: #C4B5D4;
+  --purple-soft: #E8E0F0;
+  --purple-deep: #7B6A96;
+  --text: #2A1A06;
+  --text-mid: #5C3A18;
+  --text-soft: #9A7248;
+  --border: rgba(61,36,9,0.1);
+  --border-mid: rgba(61,36,9,0.18);
+  --border-honey: rgba(200,131,42,0.3);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* grain overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.018;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2.5rem;
+  background: rgba(250,246,238,0.9);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--bark);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-mid);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--honey); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 7rem 2rem 5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.hero-orb.o1 { width: 700px; height: 700px; top: -250px; right: -200px; background: radial-gradient(circle, #F0D898 0%, transparent 70%); opacity: 0.35; }
+.hero-orb.o2 { width: 450px; height: 450px; bottom: -120px; left: -120px; background: radial-gradient(circle, #E8D4C0 0%, transparent 70%); opacity: 0.3; }
+.hero-orb.o3 { width: 180px; height: 180px; top: 25%; left: 8%; background: radial-gradient(circle, var(--purple-soft) 0%, transparent 70%); opacity: 0.5; }
+.hero-orb.o4 { width: 120px; height: 120px; bottom: 20%; right: 10%; background: radial-gradient(circle, var(--purple-soft) 0%, transparent 70%); opacity: 0.4; }
+
+.hero-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--amber-deep);
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.2s forwards;
+}
+
+.hero-seal {
+  margin: 0 auto 2rem;
+  opacity: 0;
+  animation: fadeUp 0.9s ease 0.4s forwards;
+  width: 110px;
+  height: auto;
+  mix-blend-mode: multiply;
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(44px, 7.5vw, 84px);
+  font-weight: 300;
+  line-height: 1.0;
+  color: var(--bark);
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeUp 0.9s ease 0.6s forwards;
+}
+.hero-title em { font-style: italic; color: var(--honey); }
+
+.hero-sub {
+  font-size: 15px;
+  color: var(--text-mid);
+  max-width: 500px;
+  line-height: 1.85;
+  margin: 0 auto 2.5rem;
+  opacity: 0;
+  animation: fadeUp 0.9s ease 0.8s forwards;
+}
+
+.hero-parties {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 3.5rem;
+  opacity: 0;
+  animation: fadeUp 0.9s ease 1s forwards;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.party-chip {
+  background: var(--warm-white);
+  border: 1px solid var(--border-honey);
+  border-radius: 60px;
+  padding: 0.55rem 1.4rem;
+  font-size: 12.5px;
+  color: var(--bark);
+}
+
+.party-amp {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-style: italic;
+  color: var(--text-soft);
+}
+
+.hero-scroll {
+  opacity: 0;
+  animation: fadeUp 0.9s ease 1.2s forwards;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+
+.scroll-line {
+  width: 1px;
+  height: 44px;
+  background: linear-gradient(to bottom, var(--honey-pale), transparent);
+  animation: pulse 2.2s ease infinite;
+}
+
+/* LAYOUT */
+.container { max-width: 800px; margin: 0 auto; padding: 0 2rem; }
+
+section.block { padding: 5.5rem 0; position: relative; }
+
+.section-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--amber-deep);
+  display: block;
+  margin-bottom: 0.6rem;
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(30px, 4.5vw, 46px);
+  font-weight: 300;
+  color: var(--bark);
+  line-height: 1.15;
+  margin-bottom: 2.5rem;
+}
+.section-title em { font-style: italic; color: var(--honey); }
+
+.full-divider { width: 100%; height: 1px; background: var(--border); }
+
+.ornament-divider {
+  text-align: center;
+  position: relative;
+  margin: 2.5rem 0;
+}
+.ornament-divider::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 0; right: 0;
+  height: 1px;
+  background: var(--border);
+}
+.ornament-divider span {
+  position: relative;
+  background: var(--cream);
+  padding: 0 1.2rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--text-soft);
+}
+
+/* WHY CARD */
+.why-card {
+  background: var(--warm-white);
+  border: 1px solid var(--border-mid);
+  border-radius: 22px;
+  padding: 2.5rem 2.8rem 2.2rem;
+  position: relative;
+  overflow: hidden;
+}
+.why-card::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 260px; height: 260px;
+  background: radial-gradient(circle, var(--honey-pale) 0%, transparent 70%);
+  pointer-events: none;
+}
+.why-card::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; left: -60px;
+  width: 180px; height: 180px;
+  background: radial-gradient(circle, var(--purple-soft) 0%, transparent 70%);
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.why-body {
+  font-size: 15px;
+  line-height: 2;
+  color: var(--text-mid);
+  position: relative;
+  z-index: 1;
+}
+.why-body strong { color: var(--bark); font-weight: 500; }
+
+.pull-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(19px, 3vw, 26px);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--honey);
+  line-height: 1.55;
+  padding: 1.75rem 0;
+  border-top: 1px solid var(--border-honey);
+  border-bottom: 1px solid var(--border-honey);
+  margin: 2rem 0;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* purple accent streak */
+.purple-streak {
+  display: inline-block;
+  color: var(--purple-deep);
+  font-style: italic;
+}
+
+/* CLAUSES */
+.clauses-grid { display: flex; flex-direction: column; gap: 1.4rem; }
+
+.clause-card {
+  background: var(--warm-white);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 2rem 2.2rem;
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+  transition: border-color 0.25s, transform 0.25s;
+}
+.clause-card:hover { border-color: var(--border-honey); transform: translateY(-2px); }
+
+.clause-num {
+  width: 54px; height: 54px;
+  border-radius: 50%;
+  background: var(--honey-pale);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--amber-deep);
+  flex-shrink: 0;
+}
+
+.clause-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--bark);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  line-height: 1.3;
+}
+
+.tag {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 9px;
+  border-radius: 20px;
+  border: 1px solid;
+}
+.tag-enforced { color: var(--amber-deep); border-color: var(--honey-pale); background: #FDF3E0; }
+.tag-binding { color: var(--purple-deep); border-color: var(--purple-mist); background: var(--purple-soft); }
+.tag-critical { color: #6B4018; border-color: #DBBF8A; background: #FBF0DC; }
+
+.clause-body {
+  font-size: 13.5px;
+  line-height: 1.88;
+  color: var(--text-mid);
+}
+.clause-body strong { color: var(--bark); font-weight: 500; }
+
+.sub-list {
+  margin-top: 0.75rem;
+  padding: 1rem 1.25rem;
+  background: var(--cream);
+  border-radius: 10px;
+  border-left: 3px solid var(--honey-pale);
+  font-size: 13px;
+  line-height: 2.1;
+  color: var(--text-mid);
+}
+
+/* RACCOON BAR */
+.raccoon-bar {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: var(--honey-wash);
+  border: 1px solid var(--border-honey);
+  border-radius: 16px;
+  padding: 1.4rem 1.8rem;
+  margin: 1.5rem 0;
+}
+.raccoon-bar-text {
+  font-size: 13px;
+  color: var(--bark-light);
+  line-height: 1.75;
+  flex: 1;
+}
+.raccoon-bar-text em { font-style: italic; }
+
+/* WELLNESS */
+.wellness-wrap {
+  background: var(--warm-white);
+  border: 1px solid var(--border-mid);
+  border-radius: 24px;
+  padding: 3rem 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.wellness-wrap::before {
+  content: '';
+  position: absolute;
+  top: -100px; right: -100px;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, var(--purple-soft) 0%, transparent 70%);
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.wellness-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+  position: relative;
+  z-index: 1;
+}
+
+.w-card {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.25rem 1rem;
+  text-align: center;
+}
+.w-icon { font-size: 26px; display: block; margin-bottom: 0.5rem; }
+.w-label { font-size: 12px; font-weight: 500; color: var(--bark); display: block; margin-bottom: 0.2rem; }
+.w-desc { font-size: 11.5px; color: var(--text-soft); line-height: 1.65; }
+
+.wellness-final {
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(18px, 2.5vw, 24px);
+  font-style: italic;
+  color: var(--honey);
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  line-height: 1.65;
+  position: relative;
+  z-index: 1;
+}
+
+/* SIGNATURE */
+.sig-wrap {
+  background: var(--warm-white);
+  border: 1px solid var(--border-mid);
+  border-radius: 24px;
+  padding: 3rem 2.5rem 2.5rem;
+}
+
+.sig-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  margin-top: 2rem;
+}
+@media (max-width: 580px) { .sig-grid { grid-template-columns: 1fr; } }
+
+.sig-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--bark);
+  margin-bottom: 3px;
+}
+.sig-role {
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  margin-bottom: 1rem;
+}
+.sig-canvas-area {
+  border-bottom: 1.5px solid var(--bark);
+  position: relative;
+  height: 88px;
+  overflow: hidden;
+  background: var(--cream);
+  border-radius: 4px 4px 0 0;
+  cursor: crosshair;
+  margin-bottom: 5px;
+}
+.sig-canvas-area canvas { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; }
+
+.kemal-cursive {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 30px;
+  color: var(--bark);
+  padding: 1rem 0.5rem 0.25rem;
+  display: block;
+  line-height: 1;
+}
+
+.sig-hint { font-size: 10.5px; color: var(--text-soft); font-style: italic; }
+
+.sig-date {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12.5px;
+  border: none;
+  border-bottom: 1px solid var(--border-mid);
+  background: transparent;
+  padding: 6px 2px;
+  width: 100%;
+  color: var(--text-mid);
+  outline: none;
+  margin-top: 0.75rem;
+}
+.sig-date::placeholder { color: var(--text-soft); font-style: italic; }
+
+.btn-clear-sig { font-size: 11px; color: var(--text-soft); background: none; border: none; cursor: pointer; padding: 3px 0; margin-top: 4px; display: block; }
+
+.btn-sign {
+  margin-top: 1.25rem;
+  width: 100%;
+  padding: 0.85rem;
+  background: var(--bark);
+  color: var(--cream);
+  border: none;
+  border-radius: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-sign:hover { background: var(--bark-light); transform: translateY(-1px); }
+
+.signed-confirm {
+  display: none;
+  text-align: center;
+  padding: 2rem;
+  background: var(--cream);
+  border-radius: 14px;
+  border: 1px dashed var(--border-honey);
+  margin-top: 1.5rem;
+}
+.signed-confirm p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  font-style: italic;
+  color: var(--text-mid);
+  line-height: 1.8;
+}
+
+.notary-line {
+  text-align: center;
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+.notary-caption {
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  color: var(--text-soft);
+  margin-top: 0.5rem;
+  text-transform: uppercase;
+}
+
+/* COUNTER FILING */
+.counter-section { text-align: center; padding: 3.5rem 0 1.5rem; }
+.counter-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-soft); display: block; margin-bottom: 0.9rem; }
+.btn-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.75rem 1.8rem;
+  border: 1px solid var(--border-mid);
+  border-radius: 60px;
+  background: transparent;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  color: var(--text-mid);
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.03em;
+}
+.btn-counter:hover { border-color: var(--honey); color: var(--amber-deep); }
+
+/* MODAL */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(42,26,6,0.6);
+  backdrop-filter: blur(8px);
+  z-index: 300;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+.modal-overlay.open { display: flex; }
+
+.modal-box {
+  background: var(--warm-white);
+  border-radius: 24px;
+  padding: 2.5rem 2.5rem 2rem;
+  max-width: 480px;
+  width: 100%;
+  position: relative;
+  animation: popIn 0.35s cubic-bezier(0.34,1.56,0.64,1) forwards;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-badge {
+  width: 68px; height: 68px;
+  background: var(--honey-wash);
+  border: 1.5px solid var(--border-honey);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1.2rem;
+  font-size: 28px;
+}
+
+.modal-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 27px;
+  font-weight: 600;
+  color: var(--bark);
+  text-align: center;
+  margin-bottom: 3px;
+}
+.modal-case {
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--amber-deep);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.modal-intro {
+  font-size: 13.5px;
+  line-height: 1.85;
+  color: var(--text-mid);
+  margin-bottom: 1.25rem;
+}
+
+.charge-list { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.5rem; }
+
+.charge-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.7rem 1rem;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  user-select: none;
+}
+.charge-item:hover { border-color: var(--border-honey); }
+.charge-item.checked { border-color: var(--honey); background: var(--honey-wash); }
+
+.charge-check {
+  width: 18px; height: 18px;
+  border: 1.5px solid var(--border-mid);
+  border-radius: 4px;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 1px;
+  transition: all 0.15s;
+  font-size: 11px;
+  color: var(--honey);
+}
+.charge-item.checked .charge-check { background: var(--honey-pale); border-color: var(--honey); }
+
+.charge-text { font-size: 13px; line-height: 1.6; color: var(--text-mid); }
+.charge-item.checked .charge-text { color: var(--bark); }
+
+.btn-file {
+  width: 100%;
+  padding: 0.85rem;
+  background: var(--bark);
+  color: var(--cream);
+  border: none;
+  border-radius: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-bottom: 0.75rem;
+}
+.btn-file:hover { background: var(--bark-light); }
+
+.modal-ruling {
+  display: none;
+  background: var(--cream);
+  border-radius: 12px;
+  border: 1px dashed var(--border-honey);
+  padding: 1.2rem 1.4rem;
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--text-mid);
+  margin-bottom: 1rem;
+}
+.modal-ruling strong { color: var(--bark); font-weight: 500; }
+
+.btn-dismiss { width: 100%; padding: 0.6rem; background: none; border: none; font-size: 12px; color: var(--text-soft); cursor: pointer; letter-spacing: 0.07em; }
+.btn-dismiss:hover { color: var(--bark); }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 2.5rem;
+  text-align: center;
+}
+.footer-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--bark);
+  margin-bottom: 0.6rem;
+}
+.footer-note { font-size: 11.5px; color: var(--text-soft); line-height: 1.9; }
+.footer-note em { color: var(--honey); }
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.87); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes pulse {
+  0%,100% { opacity: 0.35; }
+  50%      { opacity: 1; }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay { transition-delay: 0.15s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <!-- nav arcie mini -->
+    <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0ODggNDI0IiB3aWR0aD0iNDg4IiBoZWlnaHQ9IjQyNCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJDdXRlIHdoaXRlIGRvZyBwZWVraW5nIG92ZXIgYSBsaW5lIj4KPHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTSAyMTYuMCAyODYuMCBMIDIwOS4wIDI4OS4wIEwgMjAzLjAgMjk5LjAgTCAyMDAuMCAzMDkuMCBMIDIwMC4wIDMyNy4wIEwgMjAyLjAgMzMyLjAgTCAyMDcuMCAzMzguMCBMIDIxNy4wIDM0Mi4wIEwgMjMwLjAgMzQyLjAgTCAyMzUuMCAzNDAuMCBMIDI0MS4wIDMzMi4wIEwgMjQwLjAgMzIyLjAgTCAyNDEuMCAyOTguMCBMIDIyNy4wIDI5MC4wIEwgMjI1LjAgMjkyLjAgTCAyMTkuMCAzMTEuMCBMIDIyMC4wIDMyOC4wIEwgMjE4LjAgMzMxLjAgTCAyMTQuMCAzMzEuMCBMIDIxMS4wIDMyOC4wIEwgMjExLjAgMzA3LjAgTCAyMTQuMCAyOTYuMCBMIDIxOS4wIDI4Ny4wIFogTSAxODAuMCA3MC4wIEwgMTc3LjAgNzAuMCBMIDE3MC4wIDc4LjAgTCAxNTUuMCAxMTEuMCBMIDE0NC4wIDE0Ni4wIEwgMTQzLjAgMTU3LjAgTCAxNDUuMCAxNTkuMCBMIDE0OC4wIDE2MC4wIEwgMTU2LjAgMTU0LjAgTCAxNjEuMCAxNDYuMCBMIDE2My4wIDEzNS4wIEwgMTY3LjAgMTI4LjAgTCAxNzMuMCAxMzIuMCBMIDE3NS4wIDExOS4wIEwgMTc4LjAgMTE1LjAgTCAxODEuMCAxMTguMCBMIDE4NC4wIDExMy4wIEwgMTg3LjAgMTEyLjAgTCAxODkuMCAxMTkuMCBMIDE5MC4wIDExOS4wIEwgMTk1LjAgMTEzLjAgTCAxOTQuMCAxMDIuMCBMIDE4OS4wIDg0LjAgTCAxODUuMCA3NS4wIFogTSAzMDYuMCA2Ni4wIEwgMzAyLjAgNzAuMCBMIDI5Ni4wIDgzLjAgTCAyOTAuMCAxMDMuMCBMIDI5MC4wIDExMS4wIEwgMjk4LjAgMTIyLjAgTCAyOTcuMCAxMTUuMCBMIDI5OS4wIDExMi4wIEwgMzAxLjAgMTEzLjAgTCAzMDUuMCAxMjAuMCBMIDMxMC4wIDExNS4wIEwgMzEzLjAgMTIxLjAgTCAzMTQuMCAxMjkuMCBMIDMxNS4wIDEzMC4wIEwgMzE3LjAgMTI3LjAgTCAzMTkuMCAxMjguMCBMIDMyMC4wIDE0MS4wIEwgMzIyLjAgMTQ0LjAgTCAzMzQuMCAxNTUuMCBMIDM0My4wIDE1Ny4wIEwgMzQ2LjAgMTUzLjAgTCAzNDYuMCAxNDkuMCBMIDMzMS4wIDEwOC4wIEwgMzE2LjAgNzcuMCBMIDMwOC4wIDY2LjAgWiIgZmlsbD0iI2ZmODU4ZCIgZmlsbC1ydWxlPSJldmVub2RkIi8+CjxwYXRoIGQ9Ik0gMzE5LjAgNTkuMCBMIDI5Ni4wIDU5LjAgTCAyNjkuMCAxMDUuMCBMIDIxNy4wIDEwMy4wIEwgMTg4LjAgNjAuMCBMIDE3Mi4wIDU1LjAgTCAxNjIuMCA2NC4wIEwgMTMzLjAgMTUzLjAgTCAxMjIuMCAxNTUuMCBMIDEyMy4wIDE3Mi4wIEwgMTE1LjAgMTc1LjAgTCAxMjEuMCAyMTAuMCBMIDEwMC4wIDI1Ny4wIEwgMTA2LjAgMzEzLjAgTCAxMTUuMCAzMTYuMCBMIDExNi4wIDMyNi4wIEwgMTAxLjAgMzQwLjAgTCA5Mi4wIDM3MC4wIEwgNjEuMCAzNzAuMCBMIDYxLjAgMzc2LjAgTCAzNDguMCAzODEuMCBMIDQ0MS4wIDM3NS4wIEwgMzk5LjAgMzY5LjAgTCAzODguMCAzMzYuMCBMIDM5MC4wIDMwMi4wIEwgMzk5LjAgMzA1LjAgTCA0MDIuMCAyOTYuMCBMIDM5MS4wIDI1NC4wIEwgMzk2LjAgMjQ1LjAgTCAzNzMuMCAyMDcuMCBMIDM3OC4wIDE4NS4wIEwgMzY4LjAgMTc5LjAgTCAzNzIuMCAxNjEuMCBMIDM2My4wIDE2MS4wIEwgMzQ0LjAgMTAxLjAgWiBNIDMxNi4wIDM1NC4wIEwgMzIyLjAgMzQxLjAgTCAzMzEuMCAzMzMuMCBMIDM0NC4wIDMyOC4wIEwgMzY1LjAgMzI4LjAgTCAzNzQuMCAzMzEuMCBMIDM4NS4wIDM0MS4wIEwgMzkxLjAgMzU0LjAgTCAzOTMuMCAzNzAuMCBMIDM4NS4wIDM3MS4wIEwgMzg0LjAgMzY5LjAgTCAzODYuMCAzNjEuMCBMIDM4Mi4wIDM1OS4wIEwgMzgwLjAgMzYxLjAgTCAzNzguMCAzNjkuMCBMIDM3NC4wIDM3My4wIEwgMzY0LjAgMzc0LjAgTCAzNTkuMCAzNjkuMCBMIDM1OS4wIDM1Ny4wIEwgMzU2LjAgMzU0LjAgTCAzNTMuMCAzNTYuMCBMIDM1My4wIDM3NC4wIEwgMzQyLjAgMzc0LjAgTCAzMzcuMCAzNjguMCBMIDMzNi4wIDM1OS4wIEwgMzMzLjAgMzU3LjAgTCAzMzEuMCAzNTguMCBMIDMzMS4wIDM2Ny4wIEwgMzMzLjAgMzczLjAgTCAzMjcuMCAzNzQuMCBMIDMxOS4wIDM2OC4wIEwgMzE2LjAgMzYxLjAgWiBNIDk5LjAgMzY1LjAgTCAxMDMuMCAzNDkuMCBMIDEwOC4wIDM0MC4wIEwgMTE0LjAgMzM0LjAgTCAxMjEuMCAzMzAuMCBMIDEzNS4wIDMyNy4wIEwgMTUwLjAgMzI4LjAgTCAxNjIuMCAzMzMuMCBMIDE3MC4wIDM0MS4wIEwgMTc2LjAgMzUzLjAgTCAxNzYuMCAzNjIuMCBMIDE3NC4wIDM2Ny4wIEwgMTY1LjAgMzc0LjAgTCAxNTkuMCAzNzMuMCBMIDE2Mi4wIDM2MS4wIEwgMTYwLjAgMzU3LjAgTCAxNTYuMCAzNTguMCBMIDE1NS4wIDM2OC4wIEwgMTQ4LjAgMzc1LjAgTCAxNDEuMCAzNzUuMCBMIDEzOC4wIDM3My4wIEwgMTQwLjAgMzYwLjAgTCAxMzkuMCAzNTYuMCBMIDEzNi4wIDM1NC4wIEwgMTM0LjAgMzU1LjAgTCAxMzMuMCAzNjkuMCBMIDEyOC4wIDM3NC4wIEwgMTE4LjAgMzczLjAgTCAxMTQuMCAzNjkuMCBMIDExMi4wIDM2MS4wIEwgMTEwLjAgMzU5LjAgTCAxMDguMCAzNTkuMCBMIDEwNi4wIDM2Mi4wIEwgMTA4LjAgMzY4LjAgTCAxMDcuMCAzNzEuMCBMIDEwMC4wIDM3MS4wIFogTSAzMDkuMCA2MC4wIEwgMzMwLjAgODYuMCBMIDM1MC4wIDEzMy4wIEwgMzU3LjAgMTY4LjAgTCAzNjMuMCAxNzEuMCBMIDM1Ni4wIDE4Ny4wIEwgMzY1LjAgMTg1LjAgTCAzNjAuMCAxOTUuMCBMIDM2OS4wIDE5OS4wIEwgMzYxLjAgMjA3LjAgTCAzODguMCAyNDEuMCBMIDM4MC4wIDI1MC4wIEwgMzkzLjAgMjcwLjAgTCAzOTYuMCAyOTMuMCBMIDM4MS4wIDI4Ni4wIEwgMzg0LjAgMzI5LjAgTCAzNTkuMCAzMjIuMCBMIDMyOC4wIDMyOC4wIEwgMzEzLjAgMzQ1LjAgTCAzMTIuMCAzNzAuMCBMIDE4MS4wIDM3MC4wIEwgMTgxLjAgMzUwLjAgTCAxNzIuMCAzMzQuMCBMIDE1Mi4wIDMyMy4wIEwgMTIzLjAgMzI0LjAgTCAxMjAuMCAzMDQuMCBMIDExMi4wIDMwNi4wIEwgMTE3LjAgMjUxLjAgTCAxMDguMCAyNDkuMCBMIDEzMi4wIDIwOS4wIEwgMTI0LjAgMjAxLjAgTCAxMjUuMCAxODQuMCBMIDEzMy4wIDE4NC4wIEwgMTI4LjAgMTY0LjAgTCAxMzcuMCAxNjYuMCBMIDE1OS4wIDgyLjAgTCAxNzguMCA2MS4wIEwgMjA0LjAgOTEuMCBMIDIwNy4wIDExMC4wIEwgMjYyLjAgMTA5LjAgTCAyODAuMCAxMTYuMCBMIDI3Ni4wIDEwNi4wIEwgMjg4LjAgODAuMCBaIE0gMTgzLjAgMjM2LjAgTCAxNzQuMCAyNDkuMCBMIDE3My4wIDI2Ny4wIEwgMTgxLjAgMjg1LjAgTCAxOTUuMCAyOTguMCBMIDE5Mi4wIDMxNS4wIEwgMTk0LjAgMzMyLjAgTCAyMDMuMCAzNDQuMCBMIDIxMS4wIDM0OC4wIEwgMjI1LjAgMzUwLjAgTCAyMzguMCAzNDcuMCBMIDI0OC4wIDMzNC4wIEwgMjQ3LjAgMzE0LjAgTCAyNjMuMCAzMDYuMCBMIDI3Ny4wIDI5MC4wIEwgMjg1LjAgMjczLjAgTCAyODUuMCAyNjMuMCBMIDI3NS4wIDI3OS4wIEwgMjY0LjAgMjg4LjAgTCAyNTMuMCAyOTIuMCBMIDI0MS4wIDI5MS4wIEwgMjE4LjAgMjc3LjAgTCAyMTguMCAyNjguMCBMIDIzMC4wIDI2Mi4wIEwgMjM4LjAgMjUzLjAgTCAyMzguMCAyNDIuMCBMIDIyNS4wIDIzNS4wIEwgMjA3LjAgMjM1LjAgTCAxOTkuMCAyMzkuMCBMIDE5Ni4wIDI0OS4wIEwgMjAyLjAgMjYxLjAgTCAyMTIuMCAyNjcuMCBMIDIxMi4wIDI3OS4wIEwgMTk0LjAgMjg5LjAgTCAxODQuMCAyODAuMCBMIDE3Ni4wIDI2My4wIEwgMTc2LjAgMjQ5LjAgWiBNIDIxNS4wIDI4NS4wIEwgMjE5LjAgMjg1LjAgTCAyMjAuMCAyODcuMCBMIDIxNS4wIDI5Ni4wIEwgMjEyLjAgMzA4LjAgTCAyMTIuMCAzMjcuMCBMIDIxNC4wIDMzMC4wIEwgMjE3LjAgMzMwLjAgTCAyMTkuMCAzMjguMCBMIDIxOC4wIDMxMC4wIEwgMjIwLjAgMzAxLjAgTCAyMjUuMCAyOTAuMCBMIDIyNy4wIDI4OS4wIEwgMjQyLjAgMjk3LjAgTCAyNDEuMCAzMDUuMCBMIDI0Mi4wIDMzMi4wIEwgMjQwLjAgMzM3LjAgTCAyMzEuMCAzNDMuMCBMIDIxMy4wIDM0Mi4wIEwgMjA3LjAgMzM5LjAgTCAyMDIuMCAzMzQuMCBMIDE5OS4wIDMyNy4wIEwgMTk4LjAgMzE3LjAgTCAyMDEuMCAzMDEuMCBMIDIwNi4wIDI5MS4wIFogTSAyMDIuMCAyMjMuMCBMIDIwNS4wIDIyMy4wIEwgMjA2LjAgMjIyLjAgTCAyMjguMCAyMjIuMCBMIDIyOS4wIDIyMy4wIEwgMjMzLjAgMjIzLjAgTCAyMzIuMCAyMjIuMCBMIDIzMS4wIDIyMi4wIEwgMjMwLjAgMjIxLjAgTCAyMjkuMCAyMjEuMCBMIDIyOC4wIDIyMC4wIEwgMjI2LjAgMjIwLjAgTCAyMjUuMCAyMTkuMCBMIDIyMS4wIDIxOS4wIEwgMjIwLjAgMjE4LjAgTCAyMTUuMCAyMTguMCBMIDIxNC4wIDIxOS4wIEwgMjEwLjAgMjE5LjAgTCAyMDkuMCAyMjAuMCBMIDIwOC4wIDIyMC4wIEwgMjA3LjAgMjIxLjAgTCAyMDYuMCAyMjEuMCBMIDIwNS4wIDIyMi4wIEwgMjA0LjAgMjIyLjAgTCAyMDMuMCAyMjMuMCBaIE0gMjc4LjAgMjAwLjAgTCAyNzcuMCAyMDEuMCBMIDI3NC4wIDIwMS4wIEwgMjczLjAgMjAyLjAgTCAyNzIuMCAyMDIuMCBMIDI2OC4wIDIwNi4wIEwgMjY4LjAgMjA3LjAgTCAyNjcuMCAyMDguMCBMIDI2Ny4wIDIxNi4wIEwgMjY4LjAgMjE3LjAgTCAyNjguMCAyMTguMCBMIDI3Mi4wIDIyMi4wIEwgMjc0LjAgMjIyLjAgTCAyNzUuMCAyMjMuMCBMIDI4MS4wIDIyMy4wIEwgMjgyLjAgMjIyLjAgTCAyODMuMCAyMjIuMCBMIDI4NC4wIDIyMS4wIEwgMjg1LjAgMjIxLjAgTCAyODcuMCAyMTkuMCBMIDI4Ny4wIDIxOC4wIEwgMjg4LjAgMjE3LjAgTCAyODguMCAyMTYuMCBMIDI4OS4wIDIxNS4wIEwgMjg5LjAgMjA4LjAgTCAyODguMCAyMDcuMCBMIDI4OC4wIDIwNi4wIEwgMjg0LjAgMjAyLjAgTCAyODMuMCAyMDIuMCBMIDI4Mi4wIDIwMS4wIEwgMjc5LjAgMjAxLjAgWiBNIDI3OC4wIDIwNi4wIEwgMjc5LjAgMjA1LjAgTCAyNzkuMCAyMDQuMCBMIDI4MC4wIDIwMy4wIEwgMjg0LjAgMjAzLjAgTCAyODUuMCAyMDQuMCBMIDI4NS4wIDIwNS4wIEwgMjg2LjAgMjA2LjAgTCAyODYuMCAyMDcuMCBMIDI4My4wIDIxMC4wIEwgMjgxLjAgMjEwLjAgTCAyNzguMCAyMDcuMCBaIE0gMTczLjAgMjAxLjAgTCAxNzIuMCAyMDIuMCBMIDE3MS4wIDIwMi4wIEwgMTY4LjAgMjA1LjAgTCAxNjguMCAyMDYuMCBMIDE2Ny4wIDIwNy4wIEwgMTY3LjAgMjA5LjAgTCAxNjYuMCAyMTAuMCBMIDE2Ni4wIDIxNC4wIEwgMTY3LjAgMjE1LjAgTCAxNjcuMCAyMTcuMCBMIDE3MC4wIDIyMC4wIEwgMTcwLjAgMjIxLjAgTCAxNzEuMCAyMjEuMCBMIDE3Mi4wIDIyMi4wIEwgMTczLjAgMjIyLjAgTCAxNzQuMCAyMjMuMCBMIDE4MS4wIDIyMy4wIEwgMTgyLjAgMjIyLjAgTCAxODMuMCAyMjIuMCBMIDE4OC4wIDIxNy4wIEwgMTg4LjAgMjE0LjAgTCAxODkuMCAyMTMuMCBMIDE4OS4wIDIxMC4wIEwgMTg4LjAgMjA5LjAgTCAxODguMCAyMDcuMCBMIDE4Ny4wIDIwNi4wIEwgMTg3LjAgMjA1LjAgTCAxODQuMCAyMDIuMCBMIDE4My4wIDIwMi4wIEwgMTgyLjAgMjAxLjAgTCAxNzguMCAyMDEuMCBMIDE3Ny4wIDIwMC4wIEwgMTc2LjAgMjAxLjAgWiBNIDE3OC4wIDIwNS4wIEwgMTgwLjAgMjAzLjAgTCAxODMuMCAyMDMuMCBMIDE4NS4wIDIwNS4wIEwgMTg1LjAgMjA4LjAgTCAxODMuMCAyMTAuMCBMIDE4MC4wIDIxMC4wIEwgMTc4LjAgMjA4LjAgWiIgZmlsbD0iIzcxNDAzNSIgZmlsbC1ydWxlPSJldmVub2RkIi8+Cjwvc3ZnPg==" width="28" height="25" alt="Arcie" style="object-fit:contain; mix-blend-mode:multiply;">
+    Arcie &amp; Associates
+  </div>
+  <ul class="nav-links">
+    <li><a href="#why">The Why</a></li>
+    <li><a href="#clauses">Clauses</a></li>
+    <li><a href="#wellness">Wellness</a></li>
+    <li><a href="#sign">Sign</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-orb o1"></div>
+  <div class="hero-orb o2"></div>
+  <div class="hero-orb o3"></div>
+  <div class="hero-orb o4"></div>
+
+  <p class="hero-eyebrow">A Formally Documented Goodbye · Contract No. GPN-2026-JN</p>
+
+  <!-- Hero Samoyed - Arcie peeking -->
+  <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0ODggNDI0IiB3aWR0aD0iNDg4IiBoZWlnaHQ9IjQyNCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJDdXRlIHdoaXRlIGRvZyBwZWVraW5nIG92ZXIgYSBsaW5lIj4KPHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTSAyMTYuMCAyODYuMCBMIDIwOS4wIDI4OS4wIEwgMjAzLjAgMjk5LjAgTCAyMDAuMCAzMDkuMCBMIDIwMC4wIDMyNy4wIEwgMjAyLjAgMzMyLjAgTCAyMDcuMCAzMzguMCBMIDIxNy4wIDM0Mi4wIEwgMjMwLjAgMzQyLjAgTCAyMzUuMCAzNDAuMCBMIDI0MS4wIDMzMi4wIEwgMjQwLjAgMzIyLjAgTCAyNDEuMCAyOTguMCBMIDIyNy4wIDI5MC4wIEwgMjI1LjAgMjkyLjAgTCAyMTkuMCAzMTEuMCBMIDIyMC4wIDMyOC4wIEwgMjE4LjAgMzMxLjAgTCAyMTQuMCAzMzEuMCBMIDIxMS4wIDMyOC4wIEwgMjExLjAgMzA3LjAgTCAyMTQuMCAyOTYuMCBMIDIxOS4wIDI4Ny4wIFogTSAxODAuMCA3MC4wIEwgMTc3LjAgNzAuMCBMIDE3MC4wIDc4LjAgTCAxNTUuMCAxMTEuMCBMIDE0NC4wIDE0Ni4wIEwgMTQzLjAgMTU3LjAgTCAxNDUuMCAxNTkuMCBMIDE0OC4wIDE2MC4wIEwgMTU2LjAgMTU0LjAgTCAxNjEuMCAxNDYuMCBMIDE2My4wIDEzNS4wIEwgMTY3LjAgMTI4LjAgTCAxNzMuMCAxMzIuMCBMIDE3NS4wIDExOS4wIEwgMTc4LjAgMTE1LjAgTCAxODEuMCAxMTguMCBMIDE4NC4wIDExMy4wIEwgMTg3LjAgMTEyLjAgTCAxODkuMCAxMTkuMCBMIDE5MC4wIDExOS4wIEwgMTk1LjAgMTEzLjAgTCAxOTQuMCAxMDIuMCBMIDE4OS4wIDg0LjAgTCAxODUuMCA3NS4wIFogTSAzMDYuMCA2Ni4wIEwgMzAyLjAgNzAuMCBMIDI5Ni4wIDgzLjAgTCAyOTAuMCAxMDMuMCBMIDI5MC4wIDExMS4wIEwgMjk4LjAgMTIyLjAgTCAyOTcuMCAxMTUuMCBMIDI5OS4wIDExMi4wIEwgMzAxLjAgMTEzLjAgTCAzMDUuMCAxMjAuMCBMIDMxMC4wIDExNS4wIEwgMzEzLjAgMTIxLjAgTCAzMTQuMCAxMjkuMCBMIDMxNS4wIDEzMC4wIEwgMzE3LjAgMTI3LjAgTCAzMTkuMCAxMjguMCBMIDMyMC4wIDE0MS4wIEwgMzIyLjAgMTQ0LjAgTCAzMzQuMCAxNTUuMCBMIDM0My4wIDE1Ny4wIEwgMzQ2LjAgMTUzLjAgTCAzNDYuMCAxNDkuMCBMIDMzMS4wIDEwOC4wIEwgMzE2LjAgNzcuMCBMIDMwOC4wIDY2LjAgWiIgZmlsbD0iI2ZmODU4ZCIgZmlsbC1ydWxlPSJldmVub2RkIi8+CjxwYXRoIGQ9Ik0gMzE5LjAgNTkuMCBMIDI5Ni4wIDU5LjAgTCAyNjkuMCAxMDUuMCBMIDIxNy4wIDEwMy4wIEwgMTg4LjAgNjAuMCBMIDE3Mi4wIDU1LjAgTCAxNjIuMCA2NC4wIEwgMTMzLjAgMTUzLjAgTCAxMjIuMCAxNTUuMCBMIDEyMy4wIDE3Mi4wIEwgMTE1LjAgMTc1LjAgTCAxMjEuMCAyMTAuMCBMIDEwMC4wIDI1Ny4wIEwgMTA2LjAgMzEzLjAgTCAxMTUuMCAzMTYuMCBMIDExNi4wIDMyNi4wIEwgMTAxLjAgMzQwLjAgTCA5Mi4wIDM3MC4wIEwgNjEuMCAzNzAuMCBMIDYxLjAgMzc2LjAgTCAzNDguMCAzODEuMCBMIDQ0MS4wIDM3NS4wIEwgMzk5LjAgMzY5LjAgTCAzODguMCAzMzYuMCBMIDM5MC4wIDMwMi4wIEwgMzk5LjAgMzA1LjAgTCA0MDIuMCAyOTYuMCBMIDM5MS4wIDI1NC4wIEwgMzk2LjAgMjQ1LjAgTCAzNzMuMCAyMDcuMCBMIDM3OC4wIDE4NS4wIEwgMzY4LjAgMTc5LjAgTCAzNzIuMCAxNjEuMCBMIDM2My4wIDE2MS4wIEwgMzQ0LjAgMTAxLjAgWiBNIDMxNi4wIDM1NC4wIEwgMzIyLjAgMzQxLjAgTCAzMzEuMCAzMzMuMCBMIDM0NC4wIDMyOC4wIEwgMzY1LjAgMzI4LjAgTCAzNzQuMCAzMzEuMCBMIDM4NS4wIDM0MS4wIEwgMzkxLjAgMzU0LjAgTCAzOTMuMCAzNzAuMCBMIDM4NS4wIDM3MS4wIEwgMzg0LjAgMzY5LjAgTCAzODYuMCAzNjEuMCBMIDM4Mi4wIDM1OS4wIEwgMzgwLjAgMzYxLjAgTCAzNzguMCAzNjkuMCBMIDM3NC4wIDM3My4wIEwgMzY0LjAgMzc0LjAgTCAzNTkuMCAzNjkuMCBMIDM1OS4wIDM1Ny4wIEwgMzU2LjAgMzU0LjAgTCAzNTMuMCAzNTYuMCBMIDM1My4wIDM3NC4wIEwgMzQyLjAgMzc0LjAgTCAzMzcuMCAzNjguMCBMIDMzNi4wIDM1OS4wIEwgMzMzLjAgMzU3LjAgTCAzMzEuMCAzNTguMCBMIDMzMS4wIDM2Ny4wIEwgMzMzLjAgMzczLjAgTCAzMjcuMCAzNzQuMCBMIDMxOS4wIDM2OC4wIEwgMzE2LjAgMzYxLjAgWiBNIDk5LjAgMzY1LjAgTCAxMDMuMCAzNDkuMCBMIDEwOC4wIDM0MC4wIEwgMTE0LjAgMzM0LjAgTCAxMjEuMCAzMzAuMCBMIDEzNS4wIDMyNy4wIEwgMTUwLjAgMzI4LjAgTCAxNjIuMCAzMzMuMCBMIDE3MC4wIDM0MS4wIEwgMTc2LjAgMzUzLjAgTCAxNzYuMCAzNjIuMCBMIDE3NC4wIDM2Ny4wIEwgMTY1LjAgMzc0LjAgTCAxNTkuMCAzNzMuMCBMIDE2Mi4wIDM2MS4wIEwgMTYwLjAgMzU3LjAgTCAxNTYuMCAzNTguMCBMIDE1NS4wIDM2OC4wIEwgMTQ4LjAgMzc1LjAgTCAxNDEuMCAzNzUuMCBMIDEzOC4wIDM3My4wIEwgMTQwLjAgMzYwLjAgTCAxMzkuMCAzNTYuMCBMIDEzNi4wIDM1NC4wIEwgMTM0LjAgMzU1LjAgTCAxMzMuMCAzNjkuMCBMIDEyOC4wIDM3NC4wIEwgMTE4LjAgMzczLjAgTCAxMTQuMCAzNjkuMCBMIDExMi4wIDM2MS4wIEwgMTEwLjAgMzU5LjAgTCAxMDguMCAzNTkuMCBMIDEwNi4wIDM2Mi4wIEwgMTA4LjAgMzY4LjAgTCAxMDcuMCAzNzEuMCBMIDEwMC4wIDM3MS4wIFogTSAzMDkuMCA2MC4wIEwgMzMwLjAgODYuMCBMIDM1MC4wIDEzMy4wIEwgMzU3LjAgMTY4LjAgTCAzNjMuMCAxNzEuMCBMIDM1Ni4wIDE4Ny4wIEwgMzY1LjAgMTg1LjAgTCAzNjAuMCAxOTUuMCBMIDM2OS4wIDE5OS4wIEwgMzYxLjAgMjA3LjAgTCAzODguMCAyNDEuMCBMIDM4MC4wIDI1MC4wIEwgMzkzLjAgMjcwLjAgTCAzOTYuMCAyOTMuMCBMIDM4MS4wIDI4Ni4wIEwgMzg0LjAgMzI5LjAgTCAzNTkuMCAzMjIuMCBMIDMyOC4wIDMyOC4wIEwgMzEzLjAgMzQ1LjAgTCAzMTIuMCAzNzAuMCBMIDE4MS4wIDM3MC4wIEwgMTgxLjAgMzUwLjAgTCAxNzIuMCAzMzQuMCBMIDE1Mi4wIDMyMy4wIEwgMTIzLjAgMzI0LjAgTCAxMjAuMCAzMDQuMCBMIDExMi4wIDMwNi4wIEwgMTE3LjAgMjUxLjAgTCAxMDguMCAyNDkuMCBMIDEzMi4wIDIwOS4wIEwgMTI0LjAgMjAxLjAgTCAxMjUuMCAxODQuMCBMIDEzMy4wIDE4NC4wIEwgMTI4LjAgMTY0LjAgTCAxMzcuMCAxNjYuMCBMIDE1OS4wIDgyLjAgTCAxNzguMCA2MS4wIEwgMjA0LjAgOTEuMCBMIDIwNy4wIDExMC4wIEwgMjYyLjAgMTA5LjAgTCAyODAuMCAxMTYuMCBMIDI3Ni4wIDEwNi4wIEwgMjg4LjAgODAuMCBaIE0gMTgzLjAgMjM2LjAgTCAxNzQuMCAyNDkuMCBMIDE3My4wIDI2Ny4wIEwgMTgxLjAgMjg1LjAgTCAxOTUuMCAyOTguMCBMIDE5Mi4wIDMxNS4wIEwgMTk0LjAgMzMyLjAgTCAyMDMuMCAzNDQuMCBMIDIxMS4wIDM0OC4wIEwgMjI1LjAgMzUwLjAgTCAyMzguMCAzNDcuMCBMIDI0OC4wIDMzNC4wIEwgMjQ3LjAgMzE0LjAgTCAyNjMuMCAzMDYuMCBMIDI3Ny4wIDI5MC4wIEwgMjg1LjAgMjczLjAgTCAyODUuMCAyNjMuMCBMIDI3NS4wIDI3OS4wIEwgMjY0LjAgMjg4LjAgTCAyNTMuMCAyOTIuMCBMIDI0MS4wIDI5MS4wIEwgMjE4LjAgMjc3LjAgTCAyMTguMCAyNjguMCBMIDIzMC4wIDI2Mi4wIEwgMjM4LjAgMjUzLjAgTCAyMzguMCAyNDIuMCBMIDIyNS4wIDIzNS4wIEwgMjA3LjAgMjM1LjAgTCAxOTkuMCAyMzkuMCBMIDE5Ni4wIDI0OS4wIEwgMjAyLjAgMjYxLjAgTCAyMTIuMCAyNjcuMCBMIDIxMi4wIDI3OS4wIEwgMTk0LjAgMjg5LjAgTCAxODQuMCAyODAuMCBMIDE3Ni4wIDI2My4wIEwgMTc2LjAgMjQ5LjAgWiBNIDIxNS4wIDI4NS4wIEwgMjE5LjAgMjg1LjAgTCAyMjAuMCAyODcuMCBMIDIxNS4wIDI5Ni4wIEwgMjEyLjAgMzA4LjAgTCAyMTIuMCAzMjcuMCBMIDIxNC4wIDMzMC4wIEwgMjE3LjAgMzMwLjAgTCAyMTkuMCAzMjguMCBMIDIxOC4wIDMxMC4wIEwgMjIwLjAgMzAxLjAgTCAyMjUuMCAyOTAuMCBMIDIyNy4wIDI4OS4wIEwgMjQyLjAgMjk3LjAgTCAyNDEuMCAzMDUuMCBMIDI0Mi4wIDMzMi4wIEwgMjQwLjAgMzM3LjAgTCAyMzEuMCAzNDMuMCBMIDIxMy4wIDM0Mi4wIEwgMjA3LjAgMzM5LjAgTCAyMDIuMCAzMzQuMCBMIDE5OS4wIDMyNy4wIEwgMTk4LjAgMzE3LjAgTCAyMDEuMCAzMDEuMCBMIDIwNi4wIDI5MS4wIFogTSAyMDIuMCAyMjMuMCBMIDIwNS4wIDIyMy4wIEwgMjA2LjAgMjIyLjAgTCAyMjguMCAyMjIuMCBMIDIyOS4wIDIyMy4wIEwgMjMzLjAgMjIzLjAgTCAyMzIuMCAyMjIuMCBMIDIzMS4wIDIyMi4wIEwgMjMwLjAgMjIxLjAgTCAyMjkuMCAyMjEuMCBMIDIyOC4wIDIyMC4wIEwgMjI2LjAgMjIwLjAgTCAyMjUuMCAyMTkuMCBMIDIyMS4wIDIxOS4wIEwgMjIwLjAgMjE4LjAgTCAyMTUuMCAyMTguMCBMIDIxNC4wIDIxOS4wIEwgMjEwLjAgMjE5LjAgTCAyMDkuMCAyMjAuMCBMIDIwOC4wIDIyMC4wIEwgMjA3LjAgMjIxLjAgTCAyMDYuMCAyMjEuMCBMIDIwNS4wIDIyMi4wIEwgMjA0LjAgMjIyLjAgTCAyMDMuMCAyMjMuMCBaIE0gMjc4LjAgMjAwLjAgTCAyNzcuMCAyMDEuMCBMIDI3NC4wIDIwMS4wIEwgMjczLjAgMjAyLjAgTCAyNzIuMCAyMDIuMCBMIDI2OC4wIDIwNi4wIEwgMjY4LjAgMjA3LjAgTCAyNjcuMCAyMDguMCBMIDI2Ny4wIDIxNi4wIEwgMjY4LjAgMjE3LjAgTCAyNjguMCAyMTguMCBMIDI3Mi4wIDIyMi4wIEwgMjc0LjAgMjIyLjAgTCAyNzUuMCAyMjMuMCBMIDI4MS4wIDIyMy4wIEwgMjgyLjAgMjIyLjAgTCAyODMuMCAyMjIuMCBMIDI4NC4wIDIyMS4wIEwgMjg1LjAgMjIxLjAgTCAyODcuMCAyMTkuMCBMIDI4Ny4wIDIxOC4wIEwgMjg4LjAgMjE3LjAgTCAyODguMCAyMTYuMCBMIDI4OS4wIDIxNS4wIEwgMjg5LjAgMjA4LjAgTCAyODguMCAyMDcuMCBMIDI4OC4wIDIwNi4wIEwgMjg0LjAgMjAyLjAgTCAyODMuMCAyMDIuMCBMIDI4Mi4wIDIwMS4wIEwgMjc5LjAgMjAxLjAgWiBNIDI3OC4wIDIwNi4wIEwgMjc5LjAgMjA1LjAgTCAyNzkuMCAyMDQuMCBMIDI4MC4wIDIwMy4wIEwgMjg0LjAgMjAzLjAgTCAyODUuMCAyMDQuMCBMIDI4NS4wIDIwNS4wIEwgMjg2LjAgMjA2LjAgTCAyODYuMCAyMDcuMCBMIDI4My4wIDIxMC4wIEwgMjgxLjAgMjEwLjAgTCAyNzguMCAyMDcuMCBaIE0gMTczLjAgMjAxLjAgTCAxNzIuMCAyMDIuMCBMIDE3MS4wIDIwMi4wIEwgMTY4LjAgMjA1LjAgTCAxNjguMCAyMDYuMCBMIDE2Ny4wIDIwNy4wIEwgMTY3LjAgMjA5LjAgTCAxNjYuMCAyMTAuMCBMIDE2Ni4wIDIxNC4wIEwgMTY3LjAgMjE1LjAgTCAxNjcuMCAyMTcuMCBMIDE3MC4wIDIyMC4wIEwgMTcwLjAgMjIxLjAgTCAxNzEuMCAyMjEuMCBMIDE3Mi4wIDIyMi4wIEwgMTczLjAgMjIyLjAgTCAxNzQuMCAyMjMuMCBMIDE4MS4wIDIyMy4wIEwgMTgyLjAgMjIyLjAgTCAxODMuMCAyMjIuMCBMIDE4OC4wIDIxNy4wIEwgMTg4LjAgMjE0LjAgTCAxODkuMCAyMTMuMCBMIDE4OS4wIDIxMC4wIEwgMTg4LjAgMjA5LjAgTCAxODguMCAyMDcuMCBMIDE4Ny4wIDIwNi4wIEwgMTg3LjAgMjA1LjAgTCAxODQuMCAyMDIuMCBMIDE4My4wIDIwMi4wIEwgMTgyLjAgMjAxLjAgTCAxNzguMCAyMDEuMCBMIDE3Ny4wIDIwMC4wIEwgMTc2LjAgMjAxLjAgWiBNIDE3OC4wIDIwNS4wIEwgMTgwLjAgMjAzLjAgTCAxODMuMCAyMDMuMCBMIDE4NS4wIDIwNS4wIEwgMTg1LjAgMjA4LjAgTCAxODMuMCAyMTAuMCBMIDE4MC4wIDIxMC4wIEwgMTc4LjAgMjA4LjAgWiIgZmlsbD0iIzcxNDAzNSIgZmlsbC1ydWxlPSJldmVub2RkIi8+Cjwvc3ZnPg==" class="hero-seal" alt="Arcie the Samoyed" style="mix-blend-mode:multiply; width:110px; height:auto;">
+
+  <h1 class="hero-title">Pre-Ghosting<br><em>Notification Agreement</em></h1>
+  <p class="hero-sub">A formal, binding, and completely sincere document governing the terms under which Kemal Rahman shall disappear, and the precise conditions under which that may change.</p>
+
+  <div class="hero-parties">
+    <div class="party-chip">Kemal Rahman — The Ghost</div>
+    <div class="party-amp">&amp;</div>
+    <div class="party-chip">Juliet Nguyen — The Recipient</div>
+  </div>
+
+  <div class="hero-scroll">
+    <span>Scroll to read</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- WHY -->
+<section class="block" id="why">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-eyebrow">The Preamble — Why This Exists</span>
+      <h2 class="section-title">An Honest<br><em>Explanation</em></h2>
+    </div>
+    <div class="why-card reveal reveal-delay">
+      <p class="why-body">
+        This Agreement exists because Kemal Rahman, acting in full sincerity and with complete awareness of how ridiculous this document is, has found himself in a genuinely impossible situation.
+        <br><br>
+        <strong>Juliet Nguyen is too pretty to be his friend.</strong> This is not a complaint. It is a formal observation, entered into the record, that friendship as a category becomes functionally untenable when one party is that adorable. The ordinary terms of friendship, casual conversation, shared laughs, being in the same room, carry an <span class="purple-streak">emotional surcharge when Julie is involved</span> that has been formally recognized and documented herein.
+        <br><br>
+        <strong>She is much too adorable to continue talking to without it being something more.</strong> This is not sustainable for a person with feelings, which Kemal has confirmed he does, unfortunately, have.
+        <br><br>
+        The Ghost is not disappearing because he wants to. He is disappearing because he would very much like not to, and that is the whole problem.
+      </p>
+      <p class="why-body">Arcie presided. The raccoons witnessed.</p>
+    </div>
+  </div>
+</section>
+
+<!-- raccoon 1: gavel -->
+<div class="container">
+  <div class="raccoon-bar reveal">
+    <svg width="52" height="52" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- body -->
+      <ellipse cx="32" cy="50" rx="16" ry="13" fill="#7A7068"/>
+      <!-- head -->
+      <ellipse cx="32" cy="34" rx="15" ry="14" fill="#7A7068"/>
+      <!-- ears -->
+      <ellipse cx="20" cy="23" rx="6" ry="8" fill="#7A7068" transform="rotate(-12 20 23)"/>
+      <ellipse cx="44" cy="23" rx="6" ry="8" fill="#7A7068" transform="rotate(12 44 23)"/>
+      <ellipse cx="20" cy="23" rx="3" ry="4.5" fill="#2A2020" transform="rotate(-12 20 23)"/>
+      <ellipse cx="44" cy="23" rx="3" ry="4.5" fill="#2A2020" transform="rotate(12 44 23)"/>
+      <!-- face mask -->
+      <ellipse cx="26" cy="32" rx="6" ry="5" fill="#1E1A18"/>
+      <ellipse cx="38" cy="32" rx="6" ry="5" fill="#1E1A18"/>
+      <!-- eyes -->
+      <ellipse cx="26" cy="31" rx="3.5" ry="3.5" fill="#C8B8A8"/>
+      <ellipse cx="38" cy="31" rx="3.5" ry="3.5" fill="#C8B8A8"/>
+      <ellipse cx="26" cy="31" rx="2.2" ry="2.2" fill="#1A0F04"/>
+      <ellipse cx="38" cy="31" rx="2.2" ry="2.2" fill="#1A0F04"/>
+      <ellipse cx="26.8" cy="30.2" rx="0.8" ry="0.8" fill="white"/>
+      <ellipse cx="38.8" cy="30.2" rx="0.8" ry="0.8" fill="white"/>
+      <!-- nose snout -->
+      <ellipse cx="32" cy="37" rx="5" ry="3.5" fill="#9E9088"/>
+      <ellipse cx="32" cy="35.5" rx="3" ry="2" fill="#1A0F04"/>
+      <path d="M29 39 Q32 42 35 39" stroke="#3D2409" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+      <!-- stripe down forehead -->
+      <ellipse cx="32" cy="26" rx="2.5" ry="5" fill="#9E9088" opacity="0.5"/>
+      <!-- tail stripes going right -->
+      <path d="M46 48 Q58 44 60 50 Q62 56 50 56 Q42 56 44 52" fill="#7A7068"/>
+      <path d="M48 49 Q56 46 57 51" stroke="#2A2020" stroke-width="1.5" fill="none" opacity="0.5"/>
+      <path d="M48 52 Q55 50 56 54" stroke="#2A2020" stroke-width="1.5" fill="none" opacity="0.5"/>
+      <!-- arm holding gavel -->
+      <path d="M44 42 Q54 36 58 30" stroke="#7A7068" stroke-width="5" stroke-linecap="round"/>
+      <!-- gavel head -->
+      <rect x="54" y="22" width="14" height="9" rx="2.5" fill="#6B4018" transform="rotate(-35 54 22)"/>
+      <!-- gavel handle -->
+      <line x1="55" y1="30" x2="48" y2="42" stroke="#8C5A28" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>
+    <p class="raccoon-bar-text"><em>The raccoons have reviewed this preamble and found it credible, earnest, and slightly embarrassing for everyone involved. They bang the gavel. The preamble stands.</em></p>
+  </div>
+</div>
+
+<div class="full-divider"></div>
+
+<!-- CLAUSES -->
+<section class="block" id="clauses">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-eyebrow">The Terms — Articles I through VI</span>
+      <h2 class="section-title">The Official<br><em>Clauses</em></h2>
+    </div>
+
+    <div class="clauses-grid">
+
+      <div class="clause-card reveal">
+        <div class="clause-num">I</div>
+        <div>
+          <div class="clause-title">The Seven-Day Notice Clause <span class="tag tag-enforced">Enforced</span></div>
+          <div class="clause-body">
+            Kemal Rahman agrees, solemnly and in writing, to provide Juliet Nguyen with no fewer than <strong>seven (7) calendar days</strong> advance notice before any ghosting event commences. Said notice shall be delivered clearly via text or call. The Ghost may not initiate radio silence without this notice. Any unauthorized ghost is null and void.
+          </div>
+        </div>
+      </div>
+
+      <div class="clause-card reveal">
+        <div class="clause-num">II</div>
+        <div>
+          <div class="clause-title">The Emotional Confusion Protection Clause <span class="tag tag-critical">Critical</span></div>
+          <div class="clause-body">
+            The Recipient shall not engage in acts of deliberate or accidental emotional confusion, including:
+            <div class="sub-list">
+              (a) laughing at something the way only she laughs at things;<br>
+              (b) being vulnerable, kind, or genuine at the wrong moment;<br>
+              (c) saying something that is just very her at a pivotal moment;<br>
+              (d) existing in a way that makes the Ghost reconsider everything.
+            </div>
+            <br>
+            <strong>Violation of this clause voids any ghost attempt within 48 hours.</strong> The Ghost cannot be held responsible for wavering caused by Julie being Julie. This clause acknowledges, formally, that she already broke it before this contract was written.
+          </div>
+        </div>
+      </div>
+
+      <div class="clause-card reveal">
+        <div class="clause-num">III</div>
+        <div>
+          <div class="clause-title">The Nature of This Ghost <span class="tag tag-enforced">Indefinite</span></div>
+          <div class="clause-body">
+            This ghost is <strong>indefinite</strong> in duration. It is not a pause with a planned end date. It is not a soft launch. It exists for as long as it needs to, under the terms described in Article IV below.
+          </div>
+        </div>
+      </div>
+
+      <div class="clause-card reveal">
+        <div class="clause-num">IV</div>
+        <div>
+          <div class="clause-title">Permitted Exceptions to the Ghost <span class="tag tag-binding">Binding</span></div>
+          <div class="clause-body">
+            The ghost may only be lifted under the following specific conditions:
+            <div class="sub-list">
+              (a) <strong>The Motorcycle Exception:</strong> Should the Recipient decide to buy a motorcycle, she may contact the Ghost for assistance in testing it. The Ghost will show up. He will also worry about her the entire time.<br><br>
+              (b) <strong>The Logan Occasion:</strong> One night out with Logan Moreland, her cousin, his friend, for drinks, like old times. This exception is pre-approved, non-transferable, and limited to one occurrence per ghost period. It may feel completely normal. That is allowed.<br><br>
+              (c) <strong>The Only Exception That Really Matters:</strong> The ghost is lifted, fully, permanently, and joyfully, the moment she feels ready for something real. No notice required. No clause to invoke. Just say so.
+            </div>
+            <br>
+            <strong>Hard restriction:</strong> The ghost may not be broken if the Ghost is in a relationship. Respect is a two-way clause.
+          </div>
+        </div>
+      </div>
+
+      <div class="clause-card reveal">
+        <div class="clause-num">V</div>
+        <div>
+          <div class="clause-title">Impact on Emotional Wellbeing <span class="tag tag-critical">Critical</span></div>
+          <div class="clause-body">
+            If the Recipient breaks the ghost outside of the permitted exceptions listed in Article IV, she does so with full acknowledgment that <strong>Kemal's emotional wellbeing is a protected interest under this Agreement.</strong> The ghost exists for a reason. Breaking it carelessly would cause emotional harm, for which <strong>the Ghost will owe the Recipient $20 and one sincere conversation.</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="clause-card reveal">
+        <div class="clause-num">VI</div>
+        <div>
+          <div class="clause-title">The Julie Exception <span class="tag tag-binding">Permanent</span></div>
+          <div class="clause-body">
+            Notwithstanding all prior clauses, this contract formally recognizes the <strong>Julie Exception</strong>, an irrevocable legal principle stating that <strong>Juliet Nguyen specifically makes everything harder than it is supposed to be due to her stubborn nature.</strong> The Ghost accepts full liability for having feelings regardless. He also accepts that he would do it again. This clause is non-negotiable, cannot be amended, and will probably come up again someday.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- WELLNESS -->
+<section class="block" id="wellness">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-eyebrow">Addendum A — Welfare Provisions</span>
+      <h2 class="section-title">While the Ghost<br><em>Is in Effect</em></h2>
+    </div>
+
+    <div class="wellness-wrap reveal reveal-delay">
+      <div class="wellness-grid">
+        <div class="w-card">
+          <span class="w-icon">💧</span>
+          <span class="w-label">Drink Water</span>
+          <span class="w-desc">Only drinking water with your medicine is not enough.</span>
+        </div>
+        <div class="w-card">
+          <span class="w-icon">🍱</span>
+          <span class="w-label">Eat Enough</span>
+          <span class="w-desc">Your body is doing a lot and it needs more than Lunchables, Dino nuggets, and snacks from the plane.</span>
+        </div>
+        <div class="w-card">
+          <span class="w-icon">🌙</span>
+          <span class="w-label">Sleep More</span>
+          <span class="w-desc">Sleep is super important so please find the time to get in as many naps as possible.</span>
+        </div>
+        <div class="w-card">
+          <span class="w-icon">🍛</span>
+          <span class="w-label">Indian Food When Sad</span>
+          <span class="w-desc">This is a legally binding prescription. Vindaloo counts as self-care. It does.</span>
+        </div>
+      </div>
+
+      <!-- raccoon 2: holding tiny bowl of food, wellness vibe -->
+      <div class="raccoon-bar">
+        <svg width="52" height="52" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="30" cy="50" rx="16" ry="13" fill="#7A7068"/>
+          <ellipse cx="30" cy="34" rx="15" ry="14" fill="#7A7068"/>
+          <ellipse cx="18" cy="23" rx="6" ry="8" fill="#7A7068" transform="rotate(-12 18 23)"/>
+          <ellipse cx="42" cy="23" rx="6" ry="8" fill="#7A7068" transform="rotate(12 42 23)"/>
+          <ellipse cx="18" cy="23" rx="3" ry="4.5" fill="#2A2020" transform="rotate(-12 18 23)"/>
+          <ellipse cx="42" cy="23" rx="3" ry="4.5" fill="#2A2020" transform="rotate(12 42 23)"/>
+          <ellipse cx="24" cy="32" rx="6" ry="5" fill="#1E1A18"/>
+          <ellipse cx="36" cy="32" rx="6" ry="5" fill="#1E1A18"/>
+          <ellipse cx="24" cy="31" rx="3.5" ry="3.5" fill="#C8B8A8"/>
+          <ellipse cx="36" cy="31" rx="3.5" ry="3.5" fill="#C8B8A8"/>
+          <ellipse cx="24" cy="31" rx="2.2" ry="2.2" fill="#1A0F04"/>
+          <ellipse cx="36" cy="31" rx="2.2" ry="2.2" fill="#1A0F04"/>
+          <ellipse cx="24.8" cy="30.2" rx="0.8" ry="0.8" fill="white"/>
+          <ellipse cx="36.8" cy="30.2" rx="0.8" ry="0.8" fill="white"/>
+          <ellipse cx="30" cy="37" rx="5" ry="3.5" fill="#9E9088"/>
+          <ellipse cx="30" cy="35.5" rx="3" ry="2" fill="#1A0F04"/>
+          <path d="M27 39 Q30 43 33 39" stroke="#3D2409" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+          <ellipse cx="30" cy="26" rx="2.5" ry="5" fill="#9E9088" opacity="0.5"/>
+          <!-- tail -->
+          <path d="M44 46 Q57 42 58 48 Q59 54 47 54" fill="#7A7068"/>
+          <path d="M46 47 Q55 44 56 49" stroke="#2A2020" stroke-width="1.5" fill="none" opacity="0.5"/>
+          <path d="M46 50 Q54 48 55 52" stroke="#2A2020" stroke-width="1.5" fill="none" opacity="0.5"/>
+          <!-- arms cradling bowl -->
+          <path d="M16 46 Q10 52 14 57" stroke="#7A7068" stroke-width="5" stroke-linecap="round"/>
+          <path d="M44 46 Q50 52 46 57" stroke="#7A7068" stroke-width="5" stroke-linecap="round"/>
+          <!-- bowl -->
+          <ellipse cx="30" cy="60" rx="12" ry="5" fill="#C8832A" opacity="0.9"/>
+          <ellipse cx="30" cy="58" rx="12" ry="4" fill="#D4952E"/>
+          <ellipse cx="30" cy="57" rx="10" ry="3" fill="#E8A84A"/>
+          <!-- steam -->
+          <path d="M26 53 Q27 50 26 47" stroke="#DDD" stroke-width="1" fill="none" opacity="0.5" stroke-linecap="round"/>
+          <path d="M30 52 Q31 48 30 45" stroke="#DDD" stroke-width="1" fill="none" opacity="0.5" stroke-linecap="round"/>
+          <path d="M34 53 Q35 50 34 47" stroke="#DDD" stroke-width="1" fill="none" opacity="0.5" stroke-linecap="round"/>
+        </svg>
+        <p class="raccoon-bar-text"><em>The raccoons have reviewed Addendum A and formally cosign all of it, especially the Vindaloo clause. They also want you to know they are rooting for you. They are holding a tiny bowl of curry as proof.</em></p>
+      </div>
+
+      <div class="wellness-final">"Your existence makes the world a better place."</div>
+    </div>
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- SIGNATURE -->
+<section class="block" id="sign">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-eyebrow">Execution — Both Parties</span>
+      <h2 class="section-title">Sign the<br><em>Agreement</em></h2>
+      <p style="font-size:14.5px; color:var(--text-mid); margin-bottom:2rem; line-height:1.85; max-width:560px;">By signing below, both parties acknowledge that this document is not legally enforceable in any jurisdiction, but is emotionally binding in all of them. Arcie notarized it.</p>
+    </div>
+
+    <div class="sig-wrap reveal reveal-delay">
+      <div class="sig-grid">
+        <!-- Kemal -->
+        <div>
+          <div class="sig-name">Kemal Rahman</div>
+          <div class="sig-role">The Ghost — Party of the First Part</div>
+          <div class="sig-canvas-area" style="cursor:default; display:flex; align-items:center; padding:0 0.75rem;">
+            <span class="kemal-cursive">Kemal Rahman</span>
+          </div>
+          <p class="sig-hint" style="margin-top:5px;">Signed, sealed, and a little sad about it</p>
+          <div style="font-size:12px; color:var(--text-soft); margin-top:0.6rem;">April 30, 2026</div>
+        </div>
+
+        <!-- Julie -->
+        <div id="julieBlock">
+          <div class="sig-name">Juliet Nguyen</div>
+          <div class="sig-role">The Recipient — Party of the Second Part</div>
+          <div class="sig-canvas-area" id="sigWrap">
+            <canvas id="sigCanvas"></canvas>
+          </div>
+          <p class="sig-hint" id="sigHint" style="margin-top:5px;">Sign above, by signing you agree not to be confusing</p>
+          <button class="btn-clear-sig" id="clearBtn">Clear signature</button>
+          <input type="text" class="sig-date" id="sigDate" placeholder="Date signed…" />
+          <button class="btn-sign" id="signBtn">I accept these terms</button>
+        </div>
+      </div>
+
+      <div class="signed-confirm" id="signedConfirm">
+        <p>Contract executed. Juliet Nguyen has officially acknowledged all terms, agreed not to cause emotional confusion without prior notice, and accepted the $20 liability clause.<br><br>Arcie approves. The raccoons filed the paperwork.</p>
+      </div>
+
+      <!-- Notary -->
+      <div class="notary-line">
+                <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0ODggNDI0IiB3aWR0aD0iNDg4IiBoZWlnaHQ9IjQyNCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJDdXRlIHdoaXRlIGRvZyBwZWVraW5nIG92ZXIgYSBsaW5lIj4KPHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTSAyMTYuMCAyODYuMCBMIDIwOS4wIDI4OS4wIEwgMjAzLjAgMjk5LjAgTCAyMDAuMCAzMDkuMCBMIDIwMC4wIDMyNy4wIEwgMjAyLjAgMzMyLjAgTCAyMDcuMCAzMzguMCBMIDIxNy4wIDM0Mi4wIEwgMjMwLjAgMzQyLjAgTCAyMzUuMCAzNDAuMCBMIDI0MS4wIDMzMi4wIEwgMjQwLjAgMzIyLjAgTCAyNDEuMCAyOTguMCBMIDIyNy4wIDI5MC4wIEwgMjI1LjAgMjkyLjAgTCAyMTkuMCAzMTEuMCBMIDIyMC4wIDMyOC4wIEwgMjE4LjAgMzMxLjAgTCAyMTQuMCAzMzEuMCBMIDIxMS4wIDMyOC4wIEwgMjExLjAgMzA3LjAgTCAyMTQuMCAyOTYuMCBMIDIxOS4wIDI4Ny4wIFogTSAxODAuMCA3MC4wIEwgMTc3LjAgNzAuMCBMIDE3MC4wIDc4LjAgTCAxNTUuMCAxMTEuMCBMIDE0NC4wIDE0Ni4wIEwgMTQzLjAgMTU3LjAgTCAxNDUuMCAxNTkuMCBMIDE0OC4wIDE2MC4wIEwgMTU2LjAgMTU0LjAgTCAxNjEuMCAxNDYuMCBMIDE2My4wIDEzNS4wIEwgMTY3LjAgMTI4LjAgTCAxNzMuMCAxMzIuMCBMIDE3NS4wIDExOS4wIEwgMTc4LjAgMTE1LjAgTCAxODEuMCAxMTguMCBMIDE4NC4wIDExMy4wIEwgMTg3LjAgMTEyLjAgTCAxODkuMCAxMTkuMCBMIDE5MC4wIDExOS4wIEwgMTk1LjAgMTEzLjAgTCAxOTQuMCAxMDIuMCBMIDE4OS4wIDg0LjAgTCAxODUuMCA3NS4wIFogTSAzMDYuMCA2Ni4wIEwgMzAyLjAgNzAuMCBMIDI5Ni4wIDgzLjAgTCAyOTAuMCAxMDMuMCBMIDI5MC4wIDExMS4wIEwgMjk4LjAgMTIyLjAgTCAyOTcuMCAxMTUuMCBMIDI5OS4wIDExMi4wIEwgMzAxLjAgMTEzLjAgTCAzMDUuMCAxMjAuMCBMIDMxMC4wIDExNS4wIEwgMzEzLjAgMTIxLjAgTCAzMTQuMCAxMjkuMCBMIDMxNS4wIDEzMC4wIEwgMzE3LjAgMTI3LjAgTCAzMTkuMCAxMjguMCBMIDMyMC4wIDE0MS4wIEwgMzIyLjAgMTQ0LjAgTCAzMzQuMCAxNTUuMCBMIDM0My4wIDE1Ny4wIEwgMzQ2LjAgMTUzLjAgTCAzNDYuMCAxNDkuMCBMIDMzMS4wIDEwOC4wIEwgMzE2LjAgNzcuMCBMIDMwOC4wIDY2LjAgWiIgZmlsbD0iI2ZmODU4ZCIgZmlsbC1ydWxlPSJldmVub2RkIi8+CjxwYXRoIGQ9Ik0gMzE5LjAgNTkuMCBMIDI5Ni4wIDU5LjAgTCAyNjkuMCAxMDUuMCBMIDIxNy4wIDEwMy4wIEwgMTg4LjAgNjAuMCBMIDE3Mi4wIDU1LjAgTCAxNjIuMCA2NC4wIEwgMTMzLjAgMTUzLjAgTCAxMjIuMCAxNTUuMCBMIDEyMy4wIDE3Mi4wIEwgMTE1LjAgMTc1LjAgTCAxMjEuMCAyMTAuMCBMIDEwMC4wIDI1Ny4wIEwgMTA2LjAgMzEzLjAgTCAxMTUuMCAzMTYuMCBMIDExNi4wIDMyNi4wIEwgMTAxLjAgMzQwLjAgTCA5Mi4wIDM3MC4wIEwgNjEuMCAzNzAuMCBMIDYxLjAgMzc2LjAgTCAzNDguMCAzODEuMCBMIDQ0MS4wIDM3NS4wIEwgMzk5LjAgMzY5LjAgTCAzODguMCAzMzYuMCBMIDM5MC4wIDMwMi4wIEwgMzk5LjAgMzA1LjAgTCA0MDIuMCAyOTYuMCBMIDM5MS4wIDI1NC4wIEwgMzk2LjAgMjQ1LjAgTCAzNzMuMCAyMDcuMCBMIDM3OC4wIDE4NS4wIEwgMzY4LjAgMTc5LjAgTCAzNzIuMCAxNjEuMCBMIDM2My4wIDE2MS4wIEwgMzQ0LjAgMTAxLjAgWiBNIDMxNi4wIDM1NC4wIEwgMzIyLjAgMzQxLjAgTCAzMzEuMCAzMzMuMCBMIDM0NC4wIDMyOC4wIEwgMzY1LjAgMzI4LjAgTCAzNzQuMCAzMzEuMCBMIDM4NS4wIDM0MS4wIEwgMzkxLjAgMzU0LjAgTCAzOTMuMCAzNzAuMCBMIDM4NS4wIDM3MS4wIEwgMzg0LjAgMzY5LjAgTCAzODYuMCAzNjEuMCBMIDM4Mi4wIDM1OS4wIEwgMzgwLjAgMzYxLjAgTCAzNzguMCAzNjkuMCBMIDM3NC4wIDM3My4wIEwgMzY0LjAgMzc0LjAgTCAzNTkuMCAzNjkuMCBMIDM1OS4wIDM1Ny4wIEwgMzU2LjAgMzU0LjAgTCAzNTMuMCAzNTYuMCBMIDM1My4wIDM3NC4wIEwgMzQyLjAgMzc0LjAgTCAzMzcuMCAzNjguMCBMIDMzNi4wIDM1OS4wIEwgMzMzLjAgMzU3LjAgTCAzMzEuMCAzNTguMCBMIDMzMS4wIDM2Ny4wIEwgMzMzLjAgMzczLjAgTCAzMjcuMCAzNzQuMCBMIDMxOS4wIDM2OC4wIEwgMzE2LjAgMzYxLjAgWiBNIDk5LjAgMzY1LjAgTCAxMDMuMCAzNDkuMCBMIDEwOC4wIDM0MC4wIEwgMTE0LjAgMzM0LjAgTCAxMjEuMCAzMzAuMCBMIDEzNS4wIDMyNy4wIEwgMTUwLjAgMzI4LjAgTCAxNjIuMCAzMzMuMCBMIDE3MC4wIDM0MS4wIEwgMTc2LjAgMzUzLjAgTCAxNzYuMCAzNjIuMCBMIDE3NC4wIDM2Ny4wIEwgMTY1LjAgMzc0LjAgTCAxNTkuMCAzNzMuMCBMIDE2Mi4wIDM2MS4wIEwgMTYwLjAgMzU3LjAgTCAxNTYuMCAzNTguMCBMIDE1NS4wIDM2OC4wIEwgMTQ4LjAgMzc1LjAgTCAxNDEuMCAzNzUuMCBMIDEzOC4wIDM3My4wIEwgMTQwLjAgMzYwLjAgTCAxMzkuMCAzNTYuMCBMIDEzNi4wIDM1NC4wIEwgMTM0LjAgMzU1LjAgTCAxMzMuMCAzNjkuMCBMIDEyOC4wIDM3NC4wIEwgMTE4LjAgMzczLjAgTCAxMTQuMCAzNjkuMCBMIDExMi4wIDM2MS4wIEwgMTEwLjAgMzU5LjAgTCAxMDguMCAzNTkuMCBMIDEwNi4wIDM2Mi4wIEwgMTA4LjAgMzY4LjAgTCAxMDcuMCAzNzEuMCBMIDEwMC4wIDM3MS4wIFogTSAzMDkuMCA2MC4wIEwgMzMwLjAgODYuMCBMIDM1MC4wIDEzMy4wIEwgMzU3LjAgMTY4LjAgTCAzNjMuMCAxNzEuMCBMIDM1Ni4wIDE4Ny4wIEwgMzY1LjAgMTg1LjAgTCAzNjAuMCAxOTUuMCBMIDM2OS4wIDE5OS4wIEwgMzYxLjAgMjA3LjAgTCAzODguMCAyNDEuMCBMIDM4MC4wIDI1MC4wIEwgMzkzLjAgMjcwLjAgTCAzOTYuMCAyOTMuMCBMIDM4MS4wIDI4Ni4wIEwgMzg0LjAgMzI5LjAgTCAzNTkuMCAzMjIuMCBMIDMyOC4wIDMyOC4wIEwgMzEzLjAgMzQ1LjAgTCAzMTIuMCAzNzAuMCBMIDE4MS4wIDM3MC4wIEwgMTgxLjAgMzUwLjAgTCAxNzIuMCAzMzQuMCBMIDE1Mi4wIDMyMy4wIEwgMTIzLjAgMzI0LjAgTCAxMjAuMCAzMDQuMCBMIDExMi4wIDMwNi4wIEwgMTE3LjAgMjUxLjAgTCAxMDguMCAyNDkuMCBMIDEzMi4wIDIwOS4wIEwgMTI0LjAgMjAxLjAgTCAxMjUuMCAxODQuMCBMIDEzMy4wIDE4NC4wIEwgMTI4LjAgMTY0LjAgTCAxMzcuMCAxNjYuMCBMIDE1OS4wIDgyLjAgTCAxNzguMCA2MS4wIEwgMjA0LjAgOTEuMCBMIDIwNy4wIDExMC4wIEwgMjYyLjAgMTA5LjAgTCAyODAuMCAxMTYuMCBMIDI3Ni4wIDEwNi4wIEwgMjg4LjAgODAuMCBaIE0gMTgzLjAgMjM2LjAgTCAxNzQuMCAyNDkuMCBMIDE3My4wIDI2Ny4wIEwgMTgxLjAgMjg1LjAgTCAxOTUuMCAyOTguMCBMIDE5Mi4wIDMxNS4wIEwgMTk0LjAgMzMyLjAgTCAyMDMuMCAzNDQuMCBMIDIxMS4wIDM0OC4wIEwgMjI1LjAgMzUwLjAgTCAyMzguMCAzNDcuMCBMIDI0OC4wIDMzNC4wIEwgMjQ3LjAgMzE0LjAgTCAyNjMuMCAzMDYuMCBMIDI3Ny4wIDI5MC4wIEwgMjg1LjAgMjczLjAgTCAyODUuMCAyNjMuMCBMIDI3NS4wIDI3OS4wIEwgMjY0LjAgMjg4LjAgTCAyNTMuMCAyOTIuMCBMIDI0MS4wIDI5MS4wIEwgMjE4LjAgMjc3LjAgTCAyMTguMCAyNjguMCBMIDIzMC4wIDI2Mi4wIEwgMjM4LjAgMjUzLjAgTCAyMzguMCAyNDIuMCBMIDIyNS4wIDIzNS4wIEwgMjA3LjAgMjM1LjAgTCAxOTkuMCAyMzkuMCBMIDE5Ni4wIDI0OS4wIEwgMjAyLjAgMjYxLjAgTCAyMTIuMCAyNjcuMCBMIDIxMi4wIDI3OS4wIEwgMTk0LjAgMjg5LjAgTCAxODQuMCAyODAuMCBMIDE3Ni4wIDI2My4wIEwgMTc2LjAgMjQ5LjAgWiBNIDIxNS4wIDI4NS4wIEwgMjE5LjAgMjg1LjAgTCAyMjAuMCAyODcuMCBMIDIxNS4wIDI5Ni4wIEwgMjEyLjAgMzA4LjAgTCAyMTIuMCAzMjcuMCBMIDIxNC4wIDMzMC4wIEwgMjE3LjAgMzMwLjAgTCAyMTkuMCAzMjguMCBMIDIxOC4wIDMxMC4wIEwgMjIwLjAgMzAxLjAgTCAyMjUuMCAyOTAuMCBMIDIyNy4wIDI4OS4wIEwgMjQyLjAgMjk3LjAgTCAyNDEuMCAzMDUuMCBMIDI0Mi4wIDMzMi4wIEwgMjQwLjAgMzM3LjAgTCAyMzEuMCAzNDMuMCBMIDIxMy4wIDM0Mi4wIEwgMjA3LjAgMzM5LjAgTCAyMDIuMCAzMzQuMCBMIDE5OS4wIDMyNy4wIEwgMTk4LjAgMzE3LjAgTCAyMDEuMCAzMDEuMCBMIDIwNi4wIDI5MS4wIFogTSAyMDIuMCAyMjMuMCBMIDIwNS4wIDIyMy4wIEwgMjA2LjAgMjIyLjAgTCAyMjguMCAyMjIuMCBMIDIyOS4wIDIyMy4wIEwgMjMzLjAgMjIzLjAgTCAyMzIuMCAyMjIuMCBMIDIzMS4wIDIyMi4wIEwgMjMwLjAgMjIxLjAgTCAyMjkuMCAyMjEuMCBMIDIyOC4wIDIyMC4wIEwgMjI2LjAgMjIwLjAgTCAyMjUuMCAyMTkuMCBMIDIyMS4wIDIxOS4wIEwgMjIwLjAgMjE4LjAgTCAyMTUuMCAyMTguMCBMIDIxNC4wIDIxOS4wIEwgMjEwLjAgMjE5LjAgTCAyMDkuMCAyMjAuMCBMIDIwOC4wIDIyMC4wIEwgMjA3LjAgMjIxLjAgTCAyMDYuMCAyMjEuMCBMIDIwNS4wIDIyMi4wIEwgMjA0LjAgMjIyLjAgTCAyMDMuMCAyMjMuMCBaIE0gMjc4LjAgMjAwLjAgTCAyNzcuMCAyMDEuMCBMIDI3NC4wIDIwMS4wIEwgMjczLjAgMjAyLjAgTCAyNzIuMCAyMDIuMCBMIDI2OC4wIDIwNi4wIEwgMjY4LjAgMjA3LjAgTCAyNjcuMCAyMDguMCBMIDI2Ny4wIDIxNi4wIEwgMjY4LjAgMjE3LjAgTCAyNjguMCAyMTguMCBMIDI3Mi4wIDIyMi4wIEwgMjc0LjAgMjIyLjAgTCAyNzUuMCAyMjMuMCBMIDI4MS4wIDIyMy4wIEwgMjgyLjAgMjIyLjAgTCAyODMuMCAyMjIuMCBMIDI4NC4wIDIyMS4wIEwgMjg1LjAgMjIxLjAgTCAyODcuMCAyMTkuMCBMIDI4Ny4wIDIxOC4wIEwgMjg4LjAgMjE3LjAgTCAyODguMCAyMTYuMCBMIDI4OS4wIDIxNS4wIEwgMjg5LjAgMjA4LjAgTCAyODguMCAyMDcuMCBMIDI4OC4wIDIwNi4wIEwgMjg0LjAgMjAyLjAgTCAyODMuMCAyMDIuMCBMIDI4Mi4wIDIwMS4wIEwgMjc5LjAgMjAxLjAgWiBNIDI3OC4wIDIwNi4wIEwgMjc5LjAgMjA1LjAgTCAyNzkuMCAyMDQuMCBMIDI4MC4wIDIwMy4wIEwgMjg0LjAgMjAzLjAgTCAyODUuMCAyMDQuMCBMIDI4NS4wIDIwNS4wIEwgMjg2LjAgMjA2LjAgTCAyODYuMCAyMDcuMCBMIDI4My4wIDIxMC4wIEwgMjgxLjAgMjEwLjAgTCAyNzguMCAyMDcuMCBaIE0gMTczLjAgMjAxLjAgTCAxNzIuMCAyMDIuMCBMIDE3MS4wIDIwMi4wIEwgMTY4LjAgMjA1LjAgTCAxNjguMCAyMDYuMCBMIDE2Ny4wIDIwNy4wIEwgMTY3LjAgMjA5LjAgTCAxNjYuMCAyMTAuMCBMIDE2Ni4wIDIxNC4wIEwgMTY3LjAgMjE1LjAgTCAxNjcuMCAyMTcuMCBMIDE3MC4wIDIyMC4wIEwgMTcwLjAgMjIxLjAgTCAxNzEuMCAyMjEuMCBMIDE3Mi4wIDIyMi4wIEwgMTczLjAgMjIyLjAgTCAxNzQuMCAyMjMuMCBMIDE4MS4wIDIyMy4wIEwgMTgyLjAgMjIyLjAgTCAxODMuMCAyMjIuMCBMIDE4OC4wIDIxNy4wIEwgMTg4LjAgMjE0LjAgTCAxODkuMCAyMTMuMCBMIDE4OS4wIDIxMC4wIEwgMTg4LjAgMjA5LjAgTCAxODguMCAyMDcuMCBMIDE4Ny4wIDIwNi4wIEwgMTg3LjAgMjA1LjAgTCAxODQuMCAyMDIuMCBMIDE4My4wIDIwMi4wIEwgMTgyLjAgMjAxLjAgTCAxNzguMCAyMDEuMCBMIDE3Ny4wIDIwMC4wIEwgMTc2LjAgMjAxLjAgWiBNIDE3OC4wIDIwNS4wIEwgMTgwLjAgMjAzLjAgTCAxODMuMCAyMDMuMCBMIDE4NS4wIDIwNS4wIEwgMTg1LjAgMjA4LjAgTCAxODMuMCAyMTAuMCBMIDE4MC4wIDIxMC4wIEwgMTc4LjAgMjA4LjAgWiIgZmlsbD0iIzcxNDAzNSIgZmlsbC1ydWxlPSJldmVub2RkIi8+Cjwvc3ZnPg==" width="60" height="55" alt="Arcie, Notary" style="object-fit:contain; display:block; margin:0 auto; mix-blend-mode:multiply;">
+        <p class="notary-caption">Notarized by Arcie · Samoyed at Law · Good Girl Certified</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- raccoon 3: holding a pen, signature area footer -->
+<div class="container" style="padding-bottom: 1rem;">
+  <div class="raccoon-bar reveal">
+    <svg width="52" height="52" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="32" cy="50" rx="16" ry="13" fill="#7A7068"/>
+      <ellipse cx="32" cy="34" rx="15" ry="14" fill="#7A7068"/>
+      <ellipse cx="20" cy="23" rx="6" ry="8" fill="#7A7068" transform="rotate(-12 20 23)"/>
+      <ellipse cx="44" cy="23" rx="6" ry="8" fill="#7A7068" transform="rotate(12 44 23)"/>
+      <ellipse cx="20" cy="23" rx="3" ry="4.5" fill="#2A2020" transform="rotate(-12 20 23)"/>
+      <ellipse cx="44" cy="23" rx="3" ry="4.5" fill="#2A2020" transform="rotate(12 44 23)"/>
+      <ellipse cx="26" cy="32" rx="6" ry="5" fill="#1E1A18"/>
+      <ellipse cx="38" cy="32" rx="6" ry="5" fill="#1E1A18"/>
+      <ellipse cx="26" cy="31" rx="3.5" ry="3.5" fill="#C8B8A8"/>
+      <ellipse cx="38" cy="31" rx="3.5" ry="3.5" fill="#C8B8A8"/>
+      <ellipse cx="26" cy="31" rx="2.2" ry="2.2" fill="#1A0F04"/>
+      <ellipse cx="38" cy="31" rx="2.2" ry="2.2" fill="#1A0F04"/>
+      <ellipse cx="26.8" cy="30.2" rx="0.8" ry="0.8" fill="white"/>
+      <ellipse cx="38.8" cy="30.2" rx="0.8" ry="0.8" fill="white"/>
+      <ellipse cx="32" cy="37" rx="5" ry="3.5" fill="#9E9088"/>
+      <ellipse cx="32" cy="35.5" rx="3" ry="2" fill="#1A0F04"/>
+      <path d="M29 39 Q32 43 35 39" stroke="#3D2409" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+      <ellipse cx="32" cy="26" rx="2.5" ry="5" fill="#9E9088" opacity="0.5"/>
+      <path d="M46 47 Q58 43 60 49 Q62 55 50 55" fill="#7A7068"/>
+      <path d="M48 48 Q56 45 57 50" stroke="#2A2020" stroke-width="1.5" fill="none" opacity="0.5"/>
+      <path d="M48 51 Q55 49 56 53" stroke="#2A2020" stroke-width="1.5" fill="none" opacity="0.5"/>
+      <!-- arm holding pen pointing down -->
+      <path d="M44 44 Q54 48 56 56" stroke="#7A7068" stroke-width="5" stroke-linecap="round"/>
+      <!-- pen body -->
+      <rect x="52" y="52" width="5" height="14" rx="1.5" fill="#2C1810" transform="rotate(-20 52 52)"/>
+      <!-- pen tip -->
+      <polygon points="54,64 56,64 55,68" fill="#C8832A" transform="rotate(-20 55 64)"/>
+    </svg>
+    <p class="raccoon-bar-text"><em>The raccoons request that Julie sign this. They have been waiting. One of them brought a pen. It is a very nice pen.</em></p>
+  </div>
+</div>
+
+<!-- COUNTER FILING -->
+<div class="container">
+  <div class="counter-section reveal">
+    <span class="counter-label">For Julie's Eyes Only</span>
+    <button class="btn-counter" id="counterBtn">
+      <span>File a Counter-Complaint</span>
+      <span style="font-size:15px;">⚖️</span>
+    </button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Arcie &amp; Associates</div>
+  <p class="footer-note">
+    This document is not legally binding in any court, country, or dimension.<br>
+    It is, however, completely sincere.<br>
+    <em>Contract No. GPN-2026-JN · Filed with the Bureau of Feelings · Witnessed by Raccoons</em>
+  </p>
+</footer>
+
+<!-- COUNTER MODAL -->
+<div class="modal-overlay" id="counterModal">
+  <div class="modal-box">
+    <div class="modal-badge">⚖️</div>
+    <div class="modal-title">Counter-Complaint</div>
+    <div class="modal-case">Case No. JN-2026 · Filed by the Recipient Against the Contract</div>
+    <p class="modal-intro">Julie, you may formally object to any or all terms of this Agreement by selecting the applicable charges below. The court will review your filing and issue a binding ruling.</p>
+
+    <div class="charge-list" id="chargeList">
+      <div class="charge-item" onclick="toggleCharge(this)">
+        <div class="charge-check">✓</div>
+        <div class="charge-text">Defendant correctly identified that I am stubborn and documented it in a PDF, which is extremely rude</div>
+      </div>
+      <div class="charge-item" onclick="toggleCharge(this)">
+        <div class="charge-check">✓</div>
+        <div class="charge-text">Defendant accused me of causing emotional confusion, which is true but still annoying to see in writing</div>
+      </div>
+      <div class="charge-item" onclick="toggleCharge(this)">
+        <div class="charge-check">✓</div>
+        <div class="charge-text">This contract is too well-designed and I cannot take it seriously, which is also his fault</div>
+      </div>
+      <div class="charge-item" onclick="toggleCharge(this)">
+        <div class="charge-check">✓</div>
+        <div class="charge-text">Defendant owes me $20 and I want it acknowledged formally before any ghosting occurs</div>
+      </div>
+      <div class="charge-item" onclick="toggleCharge(this)">
+        <div class="charge-check">✓</div>
+        <div class="charge-text">The raccoons are cute and I object to being emotionally manipulated by illustrated raccoons</div>
+      </div>
+    </div>
+
+    <button class="btn-file" id="fileBtn">Submit Counter-Filing</button>
+
+    <div class="modal-ruling" id="modalRuling">
+      <strong>Court Ruling, Case No. JN-2026</strong><br><br>
+      Counter-complaint reviewed in full. All charges valid. The court finds in favor of the Recipient on every count, including the $20, the raccoons, and Arcie.<br><br>
+      However: the ghost stands. The terms hold. The contract is emotionally binding and Kemal still has to do this.<br><br>
+      <strong>Court adjourned.</strong> The raccoon with the gavel has spoken. Arcie concurs.
+    </div>
+
+    <button class="btn-dismiss" id="counterClose">Close filing</button>
+  </div>
+</div>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => io.observe(r));
+
+  // Signature canvas
+  const canvas = document.getElementById('sigCanvas');
+  const ctx = canvas.getContext('2d');
+  const wrap = document.getElementById('sigWrap');
+  let drawing = false, signed = false;
+
+  function resizeCanvas() {
+    const r = wrap.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = r.width * dpr;
+    canvas.height = r.height * dpr;
+    ctx.scale(dpr, dpr);
+    canvas.style.width = r.width + 'px';
+    canvas.style.height = r.height + 'px';
+    ctx.strokeStyle = '#2A1A06';
+    ctx.lineWidth = 1.8;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+  }
+  setTimeout(resizeCanvas, 100);
+
+  function getPos(e) {
+    const r = canvas.getBoundingClientRect();
+    if (e.touches) return { x: e.touches[0].clientX - r.left, y: e.touches[0].clientY - r.top };
+    return { x: e.clientX - r.left, y: e.clientY - r.top };
+  }
+
+  canvas.addEventListener('mousedown', e => { drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); });
+  canvas.addEventListener('mousemove', e => { if (!drawing) return; signed = true; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); });
+  canvas.addEventListener('mouseup', () => drawing = false);
+  canvas.addEventListener('mouseleave', () => drawing = false);
+  canvas.addEventListener('touchstart', e => { e.preventDefault(); drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); }, { passive: false });
+  canvas.addEventListener('touchmove', e => { e.preventDefault(); if (!drawing) return; signed = true; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); }, { passive: false });
+  canvas.addEventListener('touchend', () => drawing = false);
+
+  document.getElementById('clearBtn').addEventListener('click', () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    signed = false;
+  });
+
+  document.getElementById('signBtn').addEventListener('click', () => {
+    if (!signed) {
+      wrap.style.outline = '1.5px solid var(--honey)';
+      setTimeout(() => wrap.style.outline = '', 1000);
+      return;
+    }
+    document.getElementById('julieBlock').style.opacity = '0.55';
+    const c = document.getElementById('signedConfirm');
+    c.style.display = 'block';
+    c.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+
+  // Counter modal
+  document.getElementById('counterBtn').addEventListener('click', () => {
+    document.getElementById('counterModal').classList.add('open');
+  });
+  document.getElementById('counterClose').addEventListener('click', () => {
+    document.getElementById('counterModal').classList.remove('open');
+  });
+  document.getElementById('counterModal').addEventListener('click', e => {
+    if (e.target === document.getElementById('counterModal'))
+      document.getElementById('counterModal').classList.remove('open');
+  });
+
+  function toggleCharge(el) {
+    el.classList.toggle('checked');
+  }
+
+  document.getElementById('fileBtn').addEventListener('click', () => {
+    const checked = document.querySelectorAll('.charge-item.checked').length;
+    const ruling = document.getElementById('modalRuling');
+    ruling.style.display = 'block';
+    document.getElementById('fileBtn').style.display = 'none';
+    ruling.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+</script>
+</body>
+</html>
